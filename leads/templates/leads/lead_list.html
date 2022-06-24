@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django CRM</title>
+</head>
+
+<body>
+    <h2>Our Lead List-</h2>
+
+    {% for lead in leads %}
+    <a href="/leads/{{lead.pk}}">{{lead.first_name}} Age: {{lead.age}}</a>
+    {% endfor %}
+
+</body>
+
+</html>

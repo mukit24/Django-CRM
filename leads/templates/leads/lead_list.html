@@ -9,10 +9,13 @@
 </head>
 
 <body>
+    <a href="/leads/create/">Create a new Lead</a>
+    <hr>
     <h2>Our Lead List-</h2>
 
     {% for lead in leads %}
     <a href="/leads/{{lead.pk}}">{{lead.first_name}} Age: {{lead.age}}</a>
+    <br>
     {% endfor %}
 
 </body>

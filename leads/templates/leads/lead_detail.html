@@ -1,2 +1,5 @@
-<h3>Details of {{lead.first_name}}</h3>
-<a href="/leads">Go back to leads</a>
+<h3>Details of {{lead.first_name}} {{lead.first_name}}</h3>
+<a href="{% url 'leads:lead-list' %}">Go back to leads</a>
+<hr>
+<a href="{% url 'leads:lead-update' lead.pk %}">Update</a>
+<a href="{% url 'leads:lead-delete' lead.pk %}">Delete</a>

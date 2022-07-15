@@ -3,6 +3,8 @@ from .models import Lead,Agent
 from .forms import LeadForm,LeadModelForm
 
 # Create your views here.
+def home_page(request):
+    return render(request,'home_page.html')
 def lead_list(request):
     leads = Lead.objects.all()
     context = {
@@ -63,7 +65,7 @@ def lead_update(request,pk):
         'lead':lead,
         'form':form,
     }
-    return render(request,"leads/lead_create.html",context)
+    return render(request,"leads/lead_update.html",context)
 
 # def lead_update(request, pk):
 #     lead = Lead.objects.get(id=pk)

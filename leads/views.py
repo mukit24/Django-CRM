@@ -1,10 +1,21 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,reverse
 from .models import Lead,Agent
 from .forms import LeadForm,LeadModelForm
+from django.views.generic import TemplateView,ListView,DetailView,CreateView,UpdateView
 
 # Create your views here.
+class HomePageView(TemplateView):
+    template_name = 'home_page.html'
+
 def home_page(request):
     return render(request,'home_page.html')
+
+
+class LeadListView(ListView):
+    template_name = 'leads/lead_list.html'
+    model = Lead
+    context_object_name = 'leads'
+
 def lead_list(request):
     leads = Lead.objects.all()
     context = {
@@ -12,12 +23,26 @@ def lead_list(request):
     }
     return render(request,'leads/lead_list.html',context)
 
+
+class LeadDetailView(DetailView):
+    template_name = 'leads/lead_detail.html'
+    model = Lead
+    context_object_name = 'lead'
+
 def lead_detail(request,pk):
     lead = Lead.objects.get(id=pk)
     context = {
         'lead':lead
     }
     return render(request,"leads/lead_detail.html",context)
+
+
+class LeadCreateView(CreateView):
+    template_name = "leads/lead_create.html"
+    form_class = LeadModelForm
+
+    def get_success_url(self):
+        return reverse('leads:lead-list')
 
 def lead_create(request):
     form = LeadModelForm()
@@ -53,6 +78,14 @@ def lead_create(request):
 #     return render(request,"leads/lead_create.html",context)
 
 
+
+class LeadUpdateView(UpdateView):
+    template_name = 'leads/lead_update.html'
+    model = Lead
+    form_class = LeadModelForm
+
+    def get_success_url(selt):
+        return reverse('leads:lead-list')
 def lead_update(request,pk):
     lead = Lead.objects.get(id=pk)
     form = LeadModelForm(instance=lead)
